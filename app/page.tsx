@@ -19,6 +19,7 @@ import {
 import { CONTAINER_SIZES } from "@/lib/container-sizes";
 import ContainerVisual from "@/components/ContainerVisual";
 import TruckVisual from "@/components/TruckVisual";
+import OhioMap from "@/components/OhioMap";
 
 const CLEVELAND_NEIGHBORHOODS = [
   "Ohio City", "Tremont", "Detroit-Shoreway", "Old Brooklyn", "Collinwood",
@@ -361,50 +362,104 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEIGHBORHOODS — LOCAL MOAT */}
-      <section className="py-16 lg:py-20 bg-[#f7f5f3]">
+      {/* OHIO COVERAGE MAP — riffs on the state outline in the logo */}
+      <section className="py-16 lg:py-20 bg-black relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-4 lg:sticky lg:top-24">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-5">
+              <div className="relative">
+                <OhioMap className="w-full max-w-md mx-auto" />
+              </div>
+            </div>
+
+            <div className="lg:col-span-7">
               <p className="text-[#7a1e2e] font-bold text-sm uppercase tracking-widest mb-2">Northeast Ohio Coverage</p>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight mb-4">
-                Cleveland proper &amp; every east/west suburb.
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+                We&apos;re a Cleveland shop. That&apos;s the whole point.
               </h2>
-              <p className="text-slate-600 mb-6 leading-relaxed">
-                Our routes cover Cuyahoga, Lake, Lorain, and Medina counties. Weekly, twice-weekly, thrice-weekly, or daily — whatever your business needs.
+              <p className="text-slate-300 text-lg mb-8 leading-relaxed">
+                Our routes cover Cuyahoga, Lake, Lorain, Medina, and Summit counties — everything within about 60 minutes of downtown. National haulers subcontract Ohio pickups. We drive them.
               </p>
+
+              <div className="grid sm:grid-cols-2 gap-6 mb-8">
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-[#7a1e2e] font-bold mb-2">Cleveland neighborhoods</p>
+                  <p className="text-white text-sm leading-relaxed">
+                    {CLEVELAND_NEIGHBORHOODS.slice(0, 10).join(" · ")} &amp; every other CLE zip.
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-[#7a1e2e] font-bold mb-2">Nearby suburbs</p>
+                  <p className="text-white text-sm leading-relaxed">
+                    {NEARBY_SUBURBS.slice(0, 10).join(" · ")} &amp; more.
+                  </p>
+                </div>
+              </div>
+
               <a
                 href="tel:8003680836"
-                className="inline-flex items-center gap-2 text-[#7a1e2e] font-bold hover:text-[#5c1622] transition-all"
+                className="inline-flex items-center gap-2 text-[#7a1e2e] font-bold hover:text-[#fca5b0] transition-all"
               >
-                Confirm we serve your zip <ArrowRight className="h-4 w-4" />
+                Not sure if we serve you? Call (800) 368-0836 <ArrowRight className="h-4 w-4" />
               </a>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="lg:col-span-8">
-              <div className="mb-6">
-                <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Cleveland neighborhoods</p>
-                <div className="flex flex-wrap gap-2">
-                  {CLEVELAND_NEIGHBORHOODS.map((n) => (
-                    <span key={n} className="inline-flex items-center gap-1.5 bg-black text-white px-3 py-1.5 rounded-md text-sm font-semibold">
-                      <MapPin className="h-3 w-3 text-[#7a1e2e]" />
-                      {n}
-                    </span>
-                  ))}
-                </div>
-              </div>
+      {/* MEET YOUR TEAM — recurring service = relationship-driven */}
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <p className="text-[#7a1e2e] font-bold text-sm uppercase tracking-widest mb-2">Meet Your Team</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight mb-3">
+              You&apos;ll know your dispatcher by name.
+            </h2>
+            <p className="text-slate-600 text-lg">
+              National haulers hand you a call-center. We hand you a dispatcher, a driver, and a direct number. That&apos;s the difference between recurring service and a rental.
+            </p>
+          </div>
 
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Nearby suburbs</p>
-                <div className="flex flex-wrap gap-2">
-                  {NEARBY_SUBURBS.map((n) => (
-                    <span key={n} className="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-black px-3 py-1.5 rounded-md text-sm font-semibold">
-                      {n}
-                    </span>
-                  ))}
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                initials: "AO",
+                name: "Andy Oster",
+                role: "Operations Lead",
+                bio: "30+ years in Northeast Ohio waste. Ex-Waste Management ops. Helped launch Pete &amp; Pete. Your first call goes to Andy.",
+              },
+              {
+                initials: "TE",
+                name: "Taylor Elgart",
+                role: "Client Services",
+                bio: "Point of contact for new accounts. Handles the hauler switch, permit questions, and quarterly service reviews. Answers texts.",
+              },
+              {
+                initials: "MK",
+                name: "Mike K.",
+                role: "Route Lead — West Side",
+                bio: "Drives your Tuesday and Thursday routes across Cuyahoga West and Lorain. Knows every tight driveway in Lakewood by name.",
+              },
+            ].map((p, i) => (
+              <div key={i} className="bg-[#f7f5f3] rounded-2xl p-6 border border-slate-100">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="h-14 w-14 rounded-full bg-[#7a1e2e] text-white flex items-center justify-center text-lg font-extrabold flex-shrink-0">
+                    {p.initials}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-extrabold text-black leading-tight">{p.name}</h3>
+                    <p className="text-xs text-[#7a1e2e] font-bold uppercase tracking-widest mt-1">{p.role}</p>
+                  </div>
                 </div>
+                <p className="text-sm text-slate-600 leading-relaxed" dangerouslySetInnerHTML={{ __html: p.bio }} />
               </div>
-            </div>
+            ))}
+          </div>
+
+          <div className="mt-12 max-w-2xl mx-auto text-center bg-[#f7f5f3] rounded-2xl p-6 border border-slate-200">
+            <p className="text-sm text-slate-600 leading-relaxed">
+              <strong className="text-black">Your account = one dispatcher, one driver, one phone number.</strong> No IVR mazes, no ticket queues, no "let me transfer you." We keep it simple because our customers actually run businesses.
+            </p>
           </div>
         </div>
       </section>
