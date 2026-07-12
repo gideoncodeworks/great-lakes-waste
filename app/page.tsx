@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { CONTAINER_SIZES } from "@/lib/container-sizes";
 import ContainerVisual from "@/components/ContainerVisual";
+import TruckVisual from "@/components/TruckVisual";
 
 const CLEVELAND_NEIGHBORHOODS = [
   "Ohio City", "Tremont", "Detroit-Shoreway", "Old Brooklyn", "Collinwood",
@@ -92,26 +93,35 @@ export default function HomePage() {
 
             <div className="lg:col-span-5">
               <div className="relative">
-                <div className="absolute inset-0 bg-[#7a1e2e]/20 blur-3xl rounded-full" />
-                <div className="relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-                  <p className="text-xs uppercase tracking-widest text-[#7a1e2e] font-bold mb-2">Most popular</p>
-                  <div className="flex items-baseline justify-between mb-2">
-                    <h2 className="text-3xl font-extrabold text-white">4 Yard</h2>
+                <div className="absolute inset-0 bg-[#7a1e2e]/25 blur-3xl rounded-full" />
+                <div className="relative bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <p className="text-xs uppercase tracking-widest text-[#7a1e2e] font-bold">Pickup day</p>
+                      <p className="text-lg font-extrabold text-white mt-0.5">Every Tuesday, 7am</p>
+                    </div>
                     <div className="text-right">
-                      <p className="text-3xl font-extrabold text-[#7a1e2e]">${heroSize.monthlyStarting}</p>
-                      <p className="text-xs text-slate-400">/mo starting</p>
+                      <p className="text-xs text-slate-400 uppercase tracking-widest">On-time</p>
+                      <p className="text-xl font-extrabold text-[#7a1e2e]">99.4%</p>
                     </div>
                   </div>
-                  <p className="text-slate-400 text-sm mb-6">{heroSize.tagline} &middot; weekly to daily pickup</p>
 
-                  <ContainerVisual size={heroSize} className="w-full h-40 mb-6" />
+                  <TruckVisual className="w-full h-auto my-4" />
 
-                  <Link
-                    href={`/quote?size=${heroSize.slug}`}
-                    className="w-full flex items-center justify-center gap-2 bg-[#7a1e2e] text-white font-bold px-6 py-3.5 rounded-lg hover:bg-[#5c1622] transition-colors"
-                  >
-                    Get a 4 yard quote <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-white/10 text-center">
+                    <div>
+                      <p className="text-lg font-extrabold text-white">$0</p>
+                      <p className="text-[10px] uppercase tracking-widest text-slate-400 mt-0.5">Fuel Surcharge</p>
+                    </div>
+                    <div>
+                      <p className="text-lg font-extrabold text-white">$0</p>
+                      <p className="text-[10px] uppercase tracking-widest text-slate-400 mt-0.5">Env Fee</p>
+                    </div>
+                    <div>
+                      <p className="text-lg font-extrabold text-white">$0</p>
+                      <p className="text-[10px] uppercase tracking-widest text-slate-400 mt-0.5">Auto-Hike</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -182,6 +192,95 @@ export default function HomePage() {
                 </p>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SWITCH & SAVE — the hauling-specific differentiator */}
+      <section className="py-16 lg:py-20 bg-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#7a1e2e]/10 via-transparent to-transparent" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-[#7a1e2e] font-bold text-sm uppercase tracking-widest mb-2">Switch &amp; Save</p>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6">
+                Same container. Same pickup. Way less on the invoice.
+              </h2>
+              <p className="text-slate-300 text-lg mb-8 leading-relaxed">
+                National haulers stack on fuel surcharges, environmental fees, container rental fees, and auto-hikes. Our monthly rate is what you actually pay.
+              </p>
+
+              <div className="space-y-3 mb-8">
+                {[
+                  "No fuel surcharge (their avg: $18–35/mo)",
+                  "No environmental fee (their avg: $8–15/mo)",
+                  "No admin fee (their avg: $12/mo)",
+                  "No auto-hike (their avg: 4–7%/yr)",
+                ].map((line, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-[#7a1e2e] flex-shrink-0" />
+                    <span className="text-white font-semibold">{line}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href="/quote"
+                className="btn-cta inline-flex items-center justify-center gap-2 bg-[#7a1e2e] text-white font-bold px-8 py-4 rounded-lg hover:bg-[#5c1622] transition-colors shadow-lg"
+              >
+                Send us your last invoice &mdash; we&apos;ll match &amp; beat it
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </div>
+
+            <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-6 lg:p-8">
+              <p className="text-xs uppercase tracking-widest text-slate-400 font-bold mb-4">Real Ohio restaurant &middot; 4 yd, weekly pickup</p>
+
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-black/40 p-4 rounded-xl border border-red-900/50">
+                  <p className="text-[10px] uppercase tracking-widest text-red-400 font-bold mb-2">Your current bill</p>
+                  <p className="text-3xl font-extrabold text-white line-through decoration-red-500">$247</p>
+                  <p className="text-xs text-slate-400 mt-1">/mo — with hidden fees</p>
+                </div>
+                <div className="bg-[#7a1e2e]/10 p-4 rounded-xl border-2 border-[#7a1e2e]">
+                  <p className="text-[10px] uppercase tracking-widest text-[#7a1e2e] font-bold mb-2">Great Lakes flat</p>
+                  <p className="text-3xl font-extrabold text-[#7a1e2e]">$169</p>
+                  <p className="text-xs text-slate-400 mt-1">/mo — that&apos;s the whole bill</p>
+                </div>
+              </div>
+
+              <div className="space-y-2 text-sm border-t border-white/10 pt-4">
+                <div className="flex justify-between text-slate-300">
+                  <span>Base service (4 yd, weekly)</span>
+                  <span>$169.00</span>
+                </div>
+                <div className="flex justify-between text-red-400/70">
+                  <span>Fuel surcharge <span className="text-[10px]">(theirs, not ours)</span></span>
+                  <span className="line-through">$28.50</span>
+                </div>
+                <div className="flex justify-between text-red-400/70">
+                  <span>Environmental fee <span className="text-[10px]">(theirs, not ours)</span></span>
+                  <span className="line-through">$12.00</span>
+                </div>
+                <div className="flex justify-between text-red-400/70">
+                  <span>Container rental <span className="text-[10px]">(theirs, not ours)</span></span>
+                  <span className="line-through">$25.00</span>
+                </div>
+                <div className="flex justify-between text-red-400/70">
+                  <span>Admin fee <span className="text-[10px]">(theirs, not ours)</span></span>
+                  <span className="line-through">$12.50</span>
+                </div>
+
+                <div className="flex justify-between pt-4 mt-2 border-t border-white/10">
+                  <span className="text-white font-bold">Monthly savings</span>
+                  <span className="text-[#7a1e2e] font-extrabold text-xl">$78/mo</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400 text-xs">Over 12 months</span>
+                  <span className="text-white font-bold">= $936 back in your pocket</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
