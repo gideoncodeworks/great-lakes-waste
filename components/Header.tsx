@@ -2,107 +2,92 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import { Menu, X, ArrowRight, Phone } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X, Phone } from "lucide-react";
+
+const NAV = [
+  { label: "Service", href: "/#service" },
+  { label: "Sizes", href: "/#sizes" },
+  { label: "Coverage", href: "/#coverage" },
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
+];
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="bg-white/95 backdrop-blur-md border-b border-slate-200/60 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/images/logo.png"
-                alt="Great Lakes Waste"
-                width={402}
-                height={139}
-                priority
-                className="h-12 w-auto"
-              />
-            </Link>
-
-            <nav className="hidden lg:flex items-center gap-1">
-              <Link href="/" className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-[#0a0a0a] rounded-lg hover:bg-slate-50 transition-all">
-                Home
-              </Link>
-              <Link href="/#sizes" className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-[#0a0a0a] rounded-lg hover:bg-slate-50 transition-all">
-                Sizes &amp; Pricing
-              </Link>
-              <Link href="/quote" className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-[#0a0a0a] rounded-lg hover:bg-slate-50 transition-all">
-                Get a Quote
-              </Link>
-              <Link href="/faq" className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-[#0a0a0a] rounded-lg hover:bg-slate-50 transition-all">
-                FAQ
-              </Link>
-              <Link href="/about" className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-[#0a0a0a] rounded-lg hover:bg-slate-50 transition-all">
-                About
-              </Link>
-              <Link href="/contact" className="px-4 py-2 text-sm font-medium text-slate-700 hover:text-[#0a0a0a] rounded-lg hover:bg-slate-50 transition-all">
-                Contact
-              </Link>
-            </nav>
-
-            <div className="hidden lg:flex items-center gap-3">
-              <a href="tel:8003680836" className="flex items-center gap-1.5 text-sm font-semibold text-[#0a0a0a] hover:text-[#1f1f1f] transition-colors">
-                <Phone className="h-4 w-4" />
-                (800) 368-0836
-              </a>
-              <Link
-                href="/quote"
-                className="btn-cta inline-flex items-center gap-2 bg-[#7a1e2e] text-white text-sm font-bold px-5 py-2.5 rounded-full hover:bg-[#5c1622] hover:text-white transition-colors"
-              >
-                Get a Quote
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="flex lg:hidden items-center gap-3">
-              <a href="tel:8003680836" className="text-[#0a0a0a] p-2">
-                <Phone className="h-5 w-5" />
-              </a>
-              <button
-                className="text-slate-700 p-2 rounded-lg hover:bg-slate-100"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </button>
-            </div>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "header-scrolled text-white" : "header-over-hero"
+      }`}
+    >
+      <div className="container-max flex items-center justify-between py-5">
+        <Link href="/" className="flex items-center gap-3 shrink-0">
+          <div className={scrolled ? "" : "invert-on-dark"}>
+            <Image
+              src="/images/logo.png"
+              alt="Great Lakes Waste"
+              width={280}
+              height={70}
+              className="h-11 w-auto"
+              priority
+            />
           </div>
+        </Link>
+
+        <nav className="hidden lg:flex items-center gap-10">
+          {NAV.map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              className="eyebrow hover:opacity-70 transition-opacity"
+            >
+              {n.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden lg:flex items-center gap-6">
+          <a href="tel:8003680836" className="flex items-center gap-2 eyebrow hover:opacity-70 transition-opacity">
+            <Phone className="h-3.5 w-3.5" />
+            (800) 368-0836
+          </a>
+          <Link href="/quote" className="btn-primary">
+            Get a Quote
+          </Link>
         </div>
+
+        <button
+          onClick={() => setOpen(!open)}
+          className="lg:hidden p-2"
+          aria-label="Menu"
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
-      {isMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
-            <Link href="/" className="block px-4 py-3 text-slate-700 font-medium rounded-lg hover:bg-slate-50" onClick={() => setIsMenuOpen(false)}>
-              Home
-            </Link>
-            <Link href="/#sizes" className="block px-4 py-3 text-slate-700 font-medium rounded-lg hover:bg-slate-50" onClick={() => setIsMenuOpen(false)}>
-              Sizes &amp; Pricing
-            </Link>
-            <Link href="/quote" className="block px-4 py-3 text-slate-700 font-medium rounded-lg hover:bg-slate-50" onClick={() => setIsMenuOpen(false)}>
-              Get a Quote
-            </Link>
-            <Link href="/faq" className="block px-4 py-3 text-slate-700 font-medium rounded-lg hover:bg-slate-50" onClick={() => setIsMenuOpen(false)}>
-              FAQ
-            </Link>
-            <Link href="/about" className="block px-4 py-3 text-slate-700 font-medium rounded-lg hover:bg-slate-50" onClick={() => setIsMenuOpen(false)}>
-              About
-            </Link>
-            <Link href="/contact" className="block px-4 py-3 text-slate-700 font-medium rounded-lg hover:bg-slate-50" onClick={() => setIsMenuOpen(false)}>
-              Contact
-            </Link>
-
-            <div className="pt-3">
-              <Link
-                href="/quote"
-                className="block text-center bg-[#7a1e2e] text-white font-bold px-6 py-3 rounded-full"
-                onClick={() => setIsMenuOpen(false)}
-              >
+      {open && (
+        <div className="lg:hidden surface-black py-6 border-t border-white/10">
+          <div className="container-max flex flex-col gap-5">
+            {NAV.map((n) => (
+              <Link key={n.href} href={n.href} onClick={() => setOpen(false)} className="eyebrow-lg text-white">
+                {n.label}
+              </Link>
+            ))}
+            <div className="pt-4 mt-2 border-t border-white/10 flex flex-col gap-4">
+              <a href="tel:8003680836" className="eyebrow-lg text-gold flex items-center gap-2">
+                <Phone className="h-4 w-4" /> (800) 368-0836
+              </a>
+              <Link href="/quote" className="btn-primary self-start" onClick={() => setOpen(false)}>
                 Get a Quote
               </Link>
             </div>

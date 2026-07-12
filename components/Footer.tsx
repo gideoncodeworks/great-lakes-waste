@@ -1,108 +1,90 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin, Phone, ArrowUpRight } from "lucide-react";
-
-const sizeLinks = [
-  { name: "10 Yard", href: "/sizes/10-yard" },
-  { name: "15 Yard", href: "/sizes/15-yard" },
-  { name: "20 Yard", href: "/sizes/20-yard" },
-  { name: "30 Yard", href: "/sizes/30-yard" },
-  { name: "40 Yard", href: "/sizes/40-yard" },
-];
+import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0a0a0a] text-white">
-      <div className="h-1 bg-gradient-to-r from-[#7a1e2e] via-[#7a1e2e] to-[#7a1e2e]" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-          <div className="md:col-span-4">
-            <Link href="/" className="inline-flex items-center gap-3 mb-6 bg-white rounded-xl p-3">
+    <footer className="surface-black py-20 lg:py-24">
+      <div className="container-max">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-16">
+          <div className="lg:col-span-5">
+            <div className="invert-on-dark mb-8">
               <Image
                 src="/images/logo.png"
                 alt="Great Lakes Waste"
-                width={402}
-                height={139}
-                className="h-10 w-auto"
+                width={280}
+                height={70}
+                className="h-14 w-auto"
               />
-            </Link>
-            <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
-              Roll-off dumpsters, permanent containers, and full waste management for Greater Cleveland &amp; the Midwest. Book online in two minutes or call for a custom quote.
+            </div>
+            <p className="body-lg text-white/70 max-w-md mb-8">
+              Family-owned rear-load waste service. Cleveland since 1994. Independent. Not affiliated with any national.
             </p>
-            <div className="flex items-center gap-2 text-slate-400 text-sm">
-              <MapPin className="h-4 w-4 text-[#7a1e2e]" />
-              <span>Greater Cleveland &middot; Midwest coverage</span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-400 text-sm mt-2">
-              <Phone className="h-4 w-4 text-[#7a1e2e]" />
-              <a href="tel:8003680836" className="hover:text-white transition-colors">
-                (800) 368-0836 <span className="text-slate-500 text-xs">&middot; toll-free</span>
-              </a>
-            </div>
-            <div className="flex items-center gap-2 text-slate-400 text-sm mt-2">
-              <Phone className="h-4 w-4 text-[#7a1e2e]" />
-              <a href="tel:8003680836" className="hover:text-white transition-colors">
-                (800) 368-0836 <span className="text-slate-500 text-xs">&middot; local</span>
-              </a>
-            </div>
-            <div className="flex items-center gap-2 text-slate-400 text-sm mt-2">
-              <Mail className="h-4 w-4 text-[#7a1e2e]" />
-              <a href="mailto:sales@wasteohio.com" className="hover:text-white transition-colors">
-                sales@wasteohio.com
-              </a>
-            </div>
-          </div>
-
-          <div className="md:col-span-3">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#7a1e2e] mb-5">Dumpster Sizes</h3>
-            <ul className="space-y-3">
-              {sizeLinks.map((s) => (
-                <li key={s.href}>
-                  <Link href={s.href} className="text-slate-400 hover:text-white transition-colors text-sm flex items-center gap-1 group">
-                    {s.name}
-                    <ArrowUpRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="md:col-span-2">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#7a1e2e] mb-5">Company</h3>
-            <ul className="space-y-3">
-              <li><Link href="/" className="text-slate-400 hover:text-white transition-colors text-sm">Home</Link></li>
-              <li><Link href="/about" className="text-slate-400 hover:text-white transition-colors text-sm">About</Link></li>
-              <li><Link href="/faq" className="text-slate-400 hover:text-white transition-colors text-sm">FAQ</Link></li>
-              <li><Link href="/service-areas" className="text-slate-400 hover:text-white transition-colors text-sm">Service Areas</Link></li>
-              <li><Link href="/contact" className="text-slate-400 hover:text-white transition-colors text-sm">Contact</Link></li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-3">
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#7a1e2e] mb-5">Book Now</h3>
-            <p className="text-slate-400 text-sm mb-5">
-              Need a dumpster tomorrow? Book online in under two minutes &mdash; no calls, no back-and-forth.
-            </p>
-            <Link
-              href="/quote"
-              className="inline-flex items-center gap-2 bg-[#7a1e2e] text-white text-sm font-bold px-5 py-2.5 rounded-full hover:bg-[#5c1622] hover:text-white transition-colors"
-            >
+            <Link href="/quote" className="btn-primary">
               Get a Quote
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>
+
+          <div className="lg:col-span-3 grid grid-cols-2 gap-8">
+            <div>
+              <p className="eyebrow text-gold mb-6">Sitemap</p>
+              <ul className="space-y-4">
+                {[
+                  { l: "Home", h: "/" },
+                  { l: "Sizes", h: "/#sizes" },
+                  { l: "Coverage", h: "/#coverage" },
+                  { l: "About", h: "/about" },
+                  { l: "FAQ", h: "/faq" },
+                  { l: "Contact", h: "/contact" },
+                  { l: "Get a Quote", h: "/quote" },
+                ].map((n) => (
+                  <li key={n.h}>
+                    <Link href={n.h} className="body-sm text-white/80 hover:text-white transition-colors">
+                      {n.l}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="eyebrow text-gold mb-6">Family</p>
+              <ul className="space-y-4">
+                <li><span className="body-sm text-white/40">Proper Disposal — Roll-off</span></li>
+                <li><span className="body-sm text-white/40">Absolute Shredding</span></li>
+                <li><span className="body-sm text-white/40">EcoSafe Environmental</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="lg:col-span-4">
+            <p className="eyebrow text-gold mb-6">Reach the Dispatch</p>
+            <div className="space-y-6">
+              <div>
+                <p className="eyebrow text-white/40 mb-2">Direct</p>
+                <a href="tel:8003680836" className="display-md text-white hover:text-gold transition-colors block">
+                  (800) 368-0836
+                </a>
+              </div>
+              <div className="hairline-soft pt-6">
+                <p className="eyebrow text-white/40 mb-2">Email</p>
+                <a href="mailto:info@wasteohio.com" className="body-lg text-white hover:text-gold transition-colors block">
+                  info@wasteohio.com
+                </a>
+              </div>
+              <div className="hairline-soft pt-6">
+                <p className="eyebrow text-white/40 mb-2">Hours</p>
+                <p className="body-sm text-white/80">Mon–Fri 7am–6pm &middot; Sat 8am–2pm</p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="border-t border-white/10 mt-14 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-slate-500 text-xs">
-            &copy; {new Date().getFullYear()} Great Lakes Waste. All rights reserved.
-          </p>
-          <p className="text-slate-600 text-xs">
-            Website by{" "}
-            <a href="https://gideoncode.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#7a1e2e] transition-colors">
+        <div className="hairline-soft pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="eyebrow text-white/40">© {new Date().getFullYear()} Great Lakes Waste &middot; All rights reserved</p>
+          <p className="eyebrow text-white/40">
+            Built by{" "}
+            <a href="https://gideoncode.com" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">
               Gideon Codeworks
             </a>
           </p>
