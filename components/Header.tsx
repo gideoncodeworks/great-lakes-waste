@@ -34,7 +34,7 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <div className={scrolled ? "" : "invert-on-dark"}>
             <Image
-              src="/images/logo.png"
+              src="/images/logo-noknockout.png"
               alt="Great Lakes Waste"
               width={280}
               height={70}

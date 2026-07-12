@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="lg:col-span-5">
             <div className="invert-on-dark mb-8">
               <Image
-                src="/images/logo.png"
+                src="/images/logo-noknockout.png"
                 alt="Great Lakes Waste"
                 width={280}
                 height={70}
